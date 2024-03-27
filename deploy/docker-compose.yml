@@ -1,0 +1,44 @@
+version: '3.9'
+
+services:
+  api: &main_app
+    build:
+      context: .
+      dockerfile: ./deploy/Dockerfile
+      target: prod
+    image: vini_data_api:${VINI_DATA_API_VERSION:-latest}
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      VINI_DATA_API_HOST: 0.0.0.0
+      VINI_DATA_API_DB_HOST: vini_data_api-db
+      VINI_DATA_API_DB_PORT: 5432
+      VINI_DATA_API_DB_USER: vini_data_api
+      VINI_DATA_API_DB_PASS: vini_data_api
+      VINI_DATA_API_DB_BASE: vini_data_api
+
+  db:
+    image: postgres:13.8-bullseye
+    hostname: vini_data_api-db
+    environment:
+      POSTGRES_PASSWORD: "vini_data_api"
+      POSTGRES_USER: "vini_data_api"
+      POSTGRES_DB: "vini_data_api"
+    volumes:
+      - vini_data_api-db-data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: pg_isready -U vini_data_api
+      interval: 2s
+      timeout: 3s
+      retries: 40
+
+
+
+volumes:
+  vini_data_api-db-data:
+    name: vini_data_api-db-data
