@@ -1,7 +1,17 @@
+from typing import List
+
 from pydantic import BaseModel
 
 
-class Message(BaseModel):
-    """Simple message model."""
+class Production(BaseModel):
+    """Simple production model."""
 
-    message: str
+    product: str
+    qtd: int
+    type: str
+
+
+class ProductionResponse(BaseModel):
+    """Simple production model."""
+
+    productions: List[Production]
