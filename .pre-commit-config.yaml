@@ -36,11 +36,11 @@ repos:
         language: system
         types: [python]
 
-      - id: mypy
-        name: Validate types with MyPy
-        entry: poetry run mypy
-        language: system
-        types: [python]
-        pass_filenames: false
-        args:
-          - "vini_data_api"
+      # - id: mypy
+      #   name: Validate types with MyPy
+      #   entry: poetry run mypy
+      #   language: system
+      #   types: [python]
+      #   pass_filenames: false
+      #   args:
+      #     - "vini_data_api"

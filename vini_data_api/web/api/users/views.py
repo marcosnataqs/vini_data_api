@@ -1,8 +1,8 @@
 from fastapi import APIRouter
 
+# from vini_data_api.db.models.users import UserUpdate  # type: ignore
 from vini_data_api.db.models.users import UserCreate  # type: ignore
 from vini_data_api.db.models.users import UserRead  # type: ignore
-from vini_data_api.db.models.users import UserUpdate  # type: ignore
 from vini_data_api.db.models.users import api_users  # type: ignore
 from vini_data_api.db.models.users import auth_jwt  # type: ignore
 
@@ -14,11 +14,11 @@ router.include_router(
     tags=["auth"],
 )
 
-router.include_router(
-    api_users.get_reset_password_router(),
-    prefix="/auth",
-    tags=["auth"],
-)
+# router.include_router(
+#     api_users.get_reset_password_router(),
+#     prefix="/auth",
+#     tags=["auth"],
+# )
 
 router.include_router(
     api_users.get_verify_router(UserRead),
@@ -26,11 +26,12 @@ router.include_router(
     tags=["auth"],
 )
 
-router.include_router(
-    api_users.get_users_router(UserRead, UserUpdate),
-    prefix="/users",
-    tags=["users"],
-)
+# router.include_router(
+#     api_users.get_users_router(UserRead, UserUpdate),
+#     prefix="/users",
+#     tags=["users"],
+# )
+
 router.include_router(
     api_users.get_auth_router(auth_jwt),
     prefix="/auth/jwt",

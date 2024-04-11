@@ -26,6 +26,8 @@ SQLAlchemy = {version = "^2.0.18", extras = ["asyncio"]}
 asyncpg = {version = "^0.28.0", extras = ["sa"]}
 httptools = "^0.6.0"
 loguru = "^0.7.0"
+beautifulsoup4 = "^4.12.3"
+requests = "^2.31.0"
 
 
 [tool.poetry.dev-dependencies]
