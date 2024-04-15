@@ -1,6 +1,5 @@
 import uvicorn
 
-from vini_data_api.gunicorn_runner import GunicornApplication
 from vini_data_api.settings import settings
 
 
@@ -17,6 +16,7 @@ def main() -> None:
             factory=True,
         )
     else:
+        from vini_data_api.gunicorn_runner import GunicornApplication
         # We choose gunicorn only if reload
         # option is not used, because reload
         # feature doen't work with Uvicorn workers.
