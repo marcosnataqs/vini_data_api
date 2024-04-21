@@ -19,7 +19,7 @@ def get_app() -> FastAPI:
     configure_logging()
     app = FastAPI(
         title="Vini Data API",
-        version=metadata.version("vini_data_api"),
+        version="0.1",#metadata.version("vini_data_api"),
         docs_url="/api/docs",
         redoc_url="/api/redoc",
         openapi_url="/api/openapi.json",

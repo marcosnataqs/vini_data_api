@@ -49,7 +49,7 @@ async def get_processings(year: int) -> ProcessingResponse:
 
 
 @router.get("/commercializations/{year}", response_model=CommercializationResponse)
-async def get_commercializations(year: int) -> CommercializationResponse:
+async def get_commercializations(year: int | None) -> CommercializationResponse:
     """
     Get commercialization.
 
@@ -58,6 +58,19 @@ async def get_commercializations(year: int) -> CommercializationResponse:
     """
     ce = CommercializationExtraction()
     response = ce.extract(year)
+    return response
+
+##Isso Aqui é Gambi só pra conseguir subir o codigo validar como adaptar mais tarde
+@router.get("/commercializationsAll/")
+async def get_commercializations():
+    """
+    Get commercialization.
+
+    :param year: year to get commercialization.
+    :returns: CommercializationResponse.
+    """
+    ce = CommercializationExtraction()
+    response = ce.extract_history()
     return response
 
 

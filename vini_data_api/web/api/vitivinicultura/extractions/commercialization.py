@@ -1,3 +1,4 @@
+import pandas as pd
 from typing import Any, List
 
 from vini_data_api.web.api.vitivinicultura.extractions.base import BaseExtraction
@@ -36,6 +37,17 @@ class CommercializationExtraction(BaseExtraction):
                 commercializations.append(commercialization)
 
         return CommercializationResponse(commercializations=commercializations)
+    
+    def extract_history(self):
+        url = "http://vitibrasil.cnpuv.embrapa.br/download/Comercio.csv"
+        coll_names = ["col_A", "col_B"]
+        list_2 = [str(i) for i in range(1970, 2023)]
+        for item in list_2:
+            coll_names.append(item)
+        df = pd.read_csv(url, sep=";", names=coll_names)
+        df.loc[6:8, 'col_A'] = ['vm_Tinto_f', 'vm_Rosado_f', 'vm_Branco_f']
+        response = self.normalize_full_load(df)
+        return response
 
     def normalize(self, data: List[dict[str, str]], *args: Any) -> List[dict[str, str]]:
         flat_struct: List[dict[str, str]] = []
@@ -53,3 +65,34 @@ class CommercializationExtraction(BaseExtraction):
                 flat_struct.append(novo_item)
 
         return flat_struct
+    
+    def normalize_full_load(self, dataframe):
+        df = dataframe
+        response = []
+        sub_item = []
+        item = {}
+
+        for index, row in df.iterrows():
+            if row['col_A'].isupper():
+                if item and sub_item:
+                    item["sub_category"] = sub_item
+                    sub_item = []#reset sub-item list
+                    item={}#reset item dict
+
+                item = {"category": row['col_B'], "total_values": []}  # Create a new item dictionary for each category
+                for year in range(1970, 2023):  # Iterate over years from 1970 to 2022
+                    item["total_values"].append({year: row[str(year)]})
+                response.append(item)
+            else:
+                sub = {"name": row['col_B'], "values": []}
+                for year in range(1970, 2023):  # Iterate over years from 1970 to 2022
+                    sub["values"].append({year: row[str(year)]})
+                sub_item.append(sub)
+
+        # Add the last item
+        if item and sub_item:
+            item["sub_category"] = sub_item
+            response.append(item)
+
+        return response
+    
