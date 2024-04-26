@@ -3,7 +3,7 @@ from fastapi import HTTPException, status
 from vini_data_api.web.api.vitivinicultura.schema import ValidateYear
 
 
-def year_validation(year: int) -> None:
+def YearRangeValidation(year: int) -> None:
     try:
         year = ValidateYear(year=year)
     except ValueError:
