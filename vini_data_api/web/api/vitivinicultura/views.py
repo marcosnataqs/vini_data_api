@@ -18,6 +18,7 @@ from vini_data_api.web.api.vitivinicultura.schema import (
     ProcessingResponse,
     ProductionResponse,
 )
+from vini_data_api.web.utils.utils import year_validation
 
 router = APIRouter()
 
@@ -30,6 +31,7 @@ async def get_productions(year: int) -> ProductionResponse:
     :param year: year to get productions.
     :returns: ProductionResponse.
     """
+    year_validation(year=year)
     pe = ProductionExtraction()
     response = pe.extract(year)
     return response
@@ -43,6 +45,7 @@ async def get_processings(year: int) -> ProcessingResponse:
     :param year: year to get processing.
     :returns: ProcessingResponse.
     """
+    year_validation(year=year)
     pe = ProcessingExtraction()
     response = pe.extract(year)
     return response
@@ -69,6 +72,7 @@ async def get_imports(year: int) -> ImportResponse:
     :param year: year to get imports.
     :returns: ImportResponse.
     """
+    year_validation(year=year)
     ie = ImportExtraction()
     response = ie.extract(year)
     return response
@@ -82,6 +86,7 @@ async def get_exports(year: int) -> ExportResponse:
     :param year: year to get exports.
     :returns: ExportResponse.
     """
+    year_validation(year=year)
     ee = ExportExtraction()
     response = ee.extract(year)
     return response

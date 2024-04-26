@@ -1,6 +1,12 @@
 from typing import List, Optional
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
+
+
+class ValidateYear(BaseModel):
+    """Validate Year model."""
+
+    year: int = Field(..., ge=1970, le=2022)
 
 
 class Production(BaseModel):
