@@ -3,7 +3,7 @@ from importlib import metadata
 from fastapi import FastAPI
 from fastapi.responses import UJSONResponse
 
-from vini_data_api.logging import configure_logging
+from vini_data_api.vini_logging import configure_logging
 from vini_data_api.web.api.router import api_router
 from vini_data_api.web.lifetime import register_shutdown_event, register_startup_event
 
