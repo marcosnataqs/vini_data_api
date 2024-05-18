@@ -2,6 +2,15 @@
 
 Esse projeto foi desenvolvido para atender aos objetivos do Tech Challenge da Fase 1 da Pós Graduação em Machine Learning Engineering, turma 1MLET. Na Fase 1, o foco do projeto é a construção de uma API pública de consulta no site de vitivinicultura da Embrapa, a fim de alimentar uma base de dados que será utilizada para um modelo de Machine Learning.
 
+#### Diagrama da Arquitetura do Projeto
+![Diagrama da Arquitetura do Projeto](https://raw.githubusercontent.com/marcosnataqs/vini_data_api/main/images/diag-arch.png)
+
+#### Estrutura Código de Extração de Dados
+![Estrutura Código de Extração de Dados](https://raw.githubusercontent.com/marcosnataqs/vini_data_api/main/images/diag-extract.png)
+
+#### Exemplo de Chamada API
+![Exemplo de Chamada API](https://raw.githubusercontent.com/marcosnataqs/vini_data_api/main/images/productions-endpoint.png)
+
 ## Poetry
 
 Este projeto usa Poetry. Poetry é uma ferramenta moderna de gerenciamento de dependências.
