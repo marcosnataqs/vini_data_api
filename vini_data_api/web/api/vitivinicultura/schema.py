@@ -6,7 +6,7 @@ from pydantic import BaseModel, Field
 class ValidateYear(BaseModel):
     """Validate Year model."""
 
-    year: int = Field(..., ge=1970, le=2022)
+    year: int = Field(..., ge=1970, le=2023)
 
 
 class Production(BaseModel):

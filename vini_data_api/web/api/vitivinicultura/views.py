@@ -1,5 +1,7 @@
+from fastapi import Depends
 from fastapi.routing import APIRouter
 
+from vini_data_api.db.models.users import User, current_active_user
 from vini_data_api.web.api.vitivinicultura.extractions.commercialization import (
     CommercializationExtraction,
 )
@@ -24,7 +26,10 @@ router = APIRouter()
 
 
 @router.get("/productions/{year}", response_model=ProductionResponse)
-async def get_productions(year: int) -> ProductionResponse:
+async def get_productions(
+    year: int,
+    _user: User = Depends(current_active_user),
+) -> ProductionResponse:
     """
     Get productions.
 
@@ -38,7 +43,10 @@ async def get_productions(year: int) -> ProductionResponse:
 
 
 @router.get("/processings/{year}", response_model=ProcessingResponse)
-async def get_processings(year: int) -> ProcessingResponse:
+async def get_processings(
+    year: int,
+    _user: User = Depends(current_active_user),
+) -> ProcessingResponse:
     """
     Get processing.
 
@@ -52,7 +60,10 @@ async def get_processings(year: int) -> ProcessingResponse:
 
 
 @router.get("/commercializations/{year}", response_model=CommercializationResponse)
-async def get_commercializations(year: int) -> CommercializationResponse:
+async def get_commercializations(
+    year: int,
+    _user: User = Depends(current_active_user),
+) -> CommercializationResponse:
     """
     Get commercialization.
 
@@ -66,7 +77,10 @@ async def get_commercializations(year: int) -> CommercializationResponse:
 
 
 @router.get("/imports/{year}", response_model=ImportResponse)
-async def get_imports(year: int) -> ImportResponse:
+async def get_imports(
+    year: int,
+    _user: User = Depends(current_active_user),
+) -> ImportResponse:
     """
     Get imports.
 
@@ -80,7 +94,10 @@ async def get_imports(year: int) -> ImportResponse:
 
 
 @router.get("/exports/{year}", response_model=ExportResponse)
-async def get_exports(year: int) -> ExportResponse:
+async def get_exports(
+    year: int,
+    _user: User = Depends(current_active_user),
+) -> ExportResponse:
     """
     Get exports.
 
