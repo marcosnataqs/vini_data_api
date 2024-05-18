@@ -20,11 +20,11 @@ router.include_router(
 #     tags=["auth"],
 # )
 
-router.include_router(
-    api_users.get_verify_router(UserRead),
-    prefix="/auth",
-    tags=["auth"],
-)
+# router.include_router(
+#     api_users.get_verify_router(UserRead),
+#     prefix="/auth",
+#     tags=["auth"],
+# )
 
 # router.include_router(
 #     api_users.get_users_router(UserRead, UserUpdate),
