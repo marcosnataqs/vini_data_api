@@ -1,47 +1,21 @@
-# vini_data_api
+# Vini Data API
 
-This project was generated using fastapi_template.
+Esse projeto foi desenvolvido para atender aos objetivos do Tech Challenge da Fase 1 da Pós Graduação em Machine Learning Engineering, turma 1MLET. Na Fase 1, o foco do projeto é a construção de uma API pública de consulta no site de vitivinicultura da Embrapa, a fim de alimentar uma base de dados que será utilizada para um modelo de Machine Learning.
 
 ## Poetry
 
-This project uses poetry. It's a modern dependency management
-tool.
+Este projeto usa Poetry. Poetry é uma ferramenta moderna de gerenciamento de dependências.
 
-To run the project use this set of commands:
+Para executar o projeto use este conjunto de comandos:
 
 ```bash
 poetry install
 poetry run python -m vini_data_api
 ```
 
-This will start the server on the configured host.
+Isso iniciará o servidor no host configurado.
 
-You can find swagger documentation at `/api/docs`.
-
-You can read more about poetry here: https://python-poetry.org/
-
-## Docker
-
-You can start the project with docker using this command:
-
-```bash
-docker-compose -f deploy/docker-compose.yml --project-directory . up --build
-```
-
-If you want to develop in docker with autoreload add `-f deploy/docker-compose.dev.yml` to your docker command.
-Like this:
-
-```bash
-docker-compose -f deploy/docker-compose.yml -f deploy/docker-compose.dev.yml --project-directory . up --build
-```
-
-This command exposes the web application on port 8000, mounts current directory and enables autoreload.
-
-But you have to rebuild image every time you modify `poetry.lock` or `pyproject.toml` with this command:
-
-```bash
-docker-compose -f deploy/docker-compose.yml --project-directory . build
-```
+Você pode encontrar a documentação do swagger em `/api/docs`.
 
 ## Project structure
 
@@ -66,66 +40,38 @@ vini_data_api
 
 ## Configuration
 
-This application can be configured with environment variables.
+Este aplicativo pode ser configurado com variáveis ​​de ambiente.
 
-You can create `.env` file in the root directory and place all
-environment variables here.
+Você pode criar o arquivo `.env` no diretório raiz e colocar todos
+variáveis ​​de ambiente aqui.
 
-All environment variables should start with "VINI_DATA_API_" prefix.
+Todas as variáveis ​​de ambiente devem começar com o prefixo "VINI_DATA_API_".
 
-For example if you see in your "vini_data_api/settings.py" a variable named like
-`random_parameter`, you should provide the "VINI_DATA_API_RANDOM_PARAMETER"
-variable to configure the value. This behaviour can be changed by overriding `env_prefix` property
-in `vini_data_api.settings.Settings.Config`.
+Por exemplo, se você vir em "vini_data_api/settings.py" uma variável chamada como
+`random_parameter`, você deve fornecer o "VINI_DATA_API_RANDOM_PARAMETER"
+variável para configurar o valor. Este comportamento pode ser alterado substituindo a propriedade `env_prefix`
+em `vini_data_api.settings.Settings.Config`.
 
-An example of .env file:
+Um exemplo de arquivo .env:
 ```bash
 VINI_DATA_API_RELOAD="True"
 VINI_DATA_API_PORT="8000"
 VINI_DATA_API_ENVIRONMENT="dev"
 ```
 
-You can read more about BaseSettings class here: https://pydantic-docs.helpmanual.io/usage/settings/
-
 ## Pre-commit
 
-To install pre-commit simply run inside the shell:
+Para instalar o pré-commit basta executar dentro do shell:
 ```bash
 pre-commit install
 ```
 
-pre-commit is very useful to check your code before publishing it.
-It's configured using .pre-commit-config.yaml file.
-
-By default it runs:
-* black (formats your code);
-* mypy (validates types);
-* isort (sorts imports in all files);
-* flake8 (spots possible bugs);
-
-
-You can read more about pre-commit here: https://pre-commit.com/
-
+pre-commit é muito útil para verificar seu código antes de publicá-lo.
+Você pode ler mais sobre pré-commit aqui: https://pre-commit.com/
 
 ## Running tests
 
-If you want to run it in docker, simply run:
-
-```bash
-docker-compose -f deploy/docker-compose.yml -f deploy/docker-compose.dev.yml --project-directory . run --build --rm api pytest -vv .
-docker-compose -f deploy/docker-compose.yml -f deploy/docker-compose.dev.yml --project-directory . down
-```
-
-For running tests on your local machine.
-1. you need to start a database.
-
-I prefer doing it with docker:
-```
-docker run -p "5432:5432" -e "POSTGRES_PASSWORD=vini_data_api" -e "POSTGRES_USER=vini_data_api" -e "POSTGRES_DB=vini_data_api" postgres:13.8-bullseye
-```
-
-
-2. Run the pytest.
+Execute o pytest.
 ```bash
 pytest -vv .
 ```
